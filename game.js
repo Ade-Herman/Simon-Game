@@ -8,7 +8,6 @@ var started = false;
 
 var level = 0;
 
-//detecting keydown to start the game
 $(document).keydown(function () {
   if (!started) {
     $("#level-title").text("Level " + level);
@@ -16,11 +15,11 @@ $(document).keydown(function () {
     started = true;
   }
 });
-// detecting and placing the button clicked by user into the userClickedPattern array
+
 $(".btn").click(function () {
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
-  //passing the userChosenColour as parameter to playSound
+
   playSound(userChosenColour);
   animatePress(userChosenColour);
 
@@ -64,22 +63,20 @@ function nextSequence() {
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
 
-  // button flash animation
   $("#" + randomChosenColour)
     .fadeIn(100)
     .fadeOut(100)
     .fadeIn(100);
-  //passing the randomChosenColour as parameter to playSound
+
   playSound(randomChosenColour);
   animatePress(randomChosenColour);
 }
-// function to play the sound with parameters collected from 2 other functions
+
 function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
 
-// Clicked animation
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
 
